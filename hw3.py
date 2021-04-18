@@ -12,7 +12,27 @@ df=pd.DataFrame({
     })
 
 
+
 scaler=preprocessing.MinMaxScaler()
+scaled_df=scaler.fit_transform(df)
+print(scaled_df) #아직 넘파이
+scaled_df=pd.DataFrame(scaled_df,columns=['x1','x2','x3'])
+
+fig,(ax1,ax2)=plt.subplots(ncols=2,figsize=(6,5))
+
+
+ax1.set_title('Before Scaling')
+sns.kdeplot(df['x1'],ax=ax1)
+sns.kdeplot(df['x2'],ax=ax1)
+sns.kdeplot(df['x3'],ax=ax1)
+
+ax2.set_title('After Min-Max Scaler')
+sns.kdeplot(scaled_df['x1'],ax=ax2)
+sns.kdeplot(scaled_df['x2'],ax=ax2)
+sns.kdeplot(scaled_df['x3'],ax=ax2)
+plt.show()
+
+scaler=preprocessing.RobustScaler()
 scaled_df=scaler.fit_transform(df)
 scaled_df=pd.DataFrame(scaled_df,columns=['x1','x2','x3'])
 
@@ -24,7 +44,7 @@ sns.kdeplot(df['x1'],ax=ax1)
 sns.kdeplot(df['x2'],ax=ax1)
 sns.kdeplot(df['x3'],ax=ax1)
 
-ax2.set_title('After Standard Scaler')
+ax2.set_title('After Robust Scaler')
 sns.kdeplot(scaled_df['x1'],ax=ax2)
 sns.kdeplot(scaled_df['x2'],ax=ax2)
 sns.kdeplot(scaled_df['x3'],ax=ax2)
